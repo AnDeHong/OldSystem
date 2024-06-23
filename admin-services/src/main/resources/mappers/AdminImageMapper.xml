@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.mapper.AdminImageMapper">
+    <!-- 查询用户信息 -->
+    <select id="getByParams" resultType="com.example.entity.AdminImage">
+        SELECT * FROM admin_image ai
+        <where>
+            <if test="name != null and name != '' ">
+                and ai.name LIKE "%"#{name}"%"
+            </if>
+            <if test="code != '' and code != null ">
+                and ai.code = #{code}
+            </if>
+            <if test="status != '' and status != null">
+                and ai.is_show = #{status}
+            </if>
+            and delete_mark = 'N'
+        </where>
+    </select>
+
+</mapper>

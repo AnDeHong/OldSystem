@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.mapper.PackageMapper">
+    <resultMap id="UserPackageMap" type="com.example.vo.PackageVo">
+        <id column="id" property="id" />
+        <result column="zhuShi" property="zhu_shi"/>
+        <result column="packageNo" property="package_no"/>
+        <result column="packageName" property="package_name"/>
+        <result column="zhuCai" property="zhu_cai"/>
+        <result column="fuShi" property="fu_shi"/>
+        <result column="fuCai" property="fu_cai"/>
+        <result column="introduce" property="introduce"/>
+        <result column="dishIds" property="dish_ids"/>
+        <result column="imageUrl" property="image_url"/>
+        <result column="tags" property="tags"/>
+        <result column="price" property="price"/>
+        <result column="discount" property="discount"/>
+        <result column="discountPrice" property="discount_price"/>
+        <result column="total" property="total"/>
+    </resultMap>
+    <select id="getAll" resultMap="UserPackageMap">
+        select id,package_no ,package_name, zhu_shi, zhu_cai, fu_cai, fu_shi, introduce, dish_ids, image_url, tags,
+               price, discount, discount_price, total from package
+        <where>
+            <if test="tag != null and tag != '' and tag != 'null'">
+                and tags LIKE "%"#{tag}"%"
+            </if>
+            and delete_mark = 'N'
+        </where>
+    </select>
+    <select id="getById" resultType="com.example.entity.Package">
+        select * from package where delete_mark = 'N' and package_no = #{packageNo}
+    </select>
+</mapper>

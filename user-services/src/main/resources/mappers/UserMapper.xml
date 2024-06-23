@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.mapper.UserMapper">
+    <!-- 查询用户信息 -->
+    <resultMap id="FamilyMap" type="com.example.vo.UserInfoVo">
+        <id property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="email" column="email"/>
+        <result property="phone" column="phone"/>
+        <result property="avatar_url" column="avatarUrl"/>
+        <result property="openid" column="openid"/>
+        <result property="age" column="age"/>
+        <result property="sex" column="sex"/>
+        <result property="address" column="address"/>
+        <result property="tag" column="tag"/>
+        <result property="score" column="score"/>
+    </resultMap>
+    <select id="getUserInfos" resultMap="FamilyMap">
+        select user.id,username,email,user.phone,avatar_url,
+               openid,age,sex,ua.address,tag,score from userinfo user
+                left join user_address ua on user.id = ua.user_id
+        where user.id = #{userId}
+    </select>
+
+    <select id="getFamily" resultType="com.example.entity.Family">
+        select * from family where user_id = #{userId}
+    </select>
+    <select id="getUserList" resultType="com.example.entity.UserInfo">
+        select * from userinfo where id != #{userId}
+    </select>
+
+</mapper>

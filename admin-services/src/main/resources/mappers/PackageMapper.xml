@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.mapper.PackageMapper">
+    <!-- 查询用户信息 -->
+    <select id="getByStatus" resultType="com.example.entity.Package">
+        select * from package
+        <where>
+            <if test="name != null and name != '' ">
+                and package_name LIKE "%"#{name}"%"
+            </if>
+            <if test="type != '' and type != null ">
+                and tags LIKE "%"#{type}"%"
+            </if>
+            <if test="status != '' and status != null">
+                and is_show = #{status}
+            </if>
+            and delete_mark = 'N'
+        </where>
+    </select>
+
+    <select id="getById" resultType="com.example.entity.Package">
+        select * from package where delete_mark = 'N' and package_no = #{packageNo}
+    </select>
+</mapper>

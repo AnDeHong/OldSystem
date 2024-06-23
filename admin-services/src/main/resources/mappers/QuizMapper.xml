@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.mapper.QuizMapper">
+    <!-- 查询用户信息 -->
+    <select id="getAll" resultType="com.example.entity.Quiz">
+        select * from interaction
+        <where>
+            <if test="quizName != null and quizName != '' ">
+                and CREATED_BY LIKE "%"#{quizName}"%"
+            </if>
+            <if test="createTime != '' and createTime != null ">
+                and #{createTime} >= CREATED_TIME
+            </if>
+            <if test="quizDate != '' and quizDate != null ">
+                and CREATED_TIME >= #{quizDate}
+            </if>
+            <if test="status != '' and status != null">
+                and status = #{status}
+            </if>
+            and delete_mark = 'N'
+        </where>
+    </select>
+
+    <select id="getQuizAnswer" resultType="com.example.entity.QuizAnswer">
+        select * from interaction_answer where interaction_id = #{id} and delete_mark = 'N'
+    </select>
+
+    <select id="getById" resultType="com.example.entity.Quiz">
+        select * from interaction where id = #{id} and delete_mark = 'N'
+    </select>
+</mapper>

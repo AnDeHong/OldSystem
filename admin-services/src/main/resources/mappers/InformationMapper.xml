@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.mapper.InformationMapper">
+    <!-- 查询用户信息 -->
+    <select id="getAll" resultType="com.example.entity.Information">
+        select * from information
+        <where>
+            <if test="title != null and title != '' ">
+                and title LIKE "%"#{title}"%"
+            </if>
+            <if test="type != '' and type != null ">
+                and #{type} = type
+            </if>
+            <if test="tag != '' and tag != null ">
+                and tag = #{tag}
+            </if>
+            <if test="status != '' and status != null">
+                and status = #{status}
+            </if>
+            and delete_mark = 'N'
+        </where>
+    </select>
+    <select id="getById" resultType="com.example.entity.Information">
+        select *
+        from information where id = #{id} and delete_mark = 'N';
+    </select>
+</mapper>

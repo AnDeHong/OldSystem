@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.mapper.OrdersMapper">
+    <!-- 查询订单信息 -->
+    <resultMap id="ordersVoMap" type="com.example.vo.OrdersVo">
+        <id column="id" property="id" />
+        <result column="userId" property="user_id" />
+        <result column="username" property="username" />
+        <result column="address" property="address" />
+        <result column="dishIds" property="dish_ids" />
+        <result column="price" property="price" />
+        <result column="sendId" property="send_id" />
+        <result column="chooseDate" property="choose_date" />
+        <result column="orderDate" property="order_date" />
+        <result column="reachDate" property="reach_date" />
+        <result column="num" property="num"/>
+        <result column="status" property="status"/>
+        <result column="evaluate" property="evaluate" />
+        <result column="notes" property="notes" />
+    </resultMap>
+
+    <select id="getOrders" resultMap="ordersVoMap">
+        select id,user_id,address_id,dish_ids,price,send_id,order_date,reach_date,
+               num,status,evaluate,notes,choose_date
+        from orders where delete_mark = 'N'
+    </select>
+
+    <select id="getOrdersBy" resultMap="ordersVoMap" parameterType="com.example.vo.OrderGetVo">
+        select o.id id,o.user_id user_id,user.username username,uad.address address,dish_ids,price,send_id,order_date,reach_date,
+        num,status,evaluate,notes,choose_date
+        from orders o
+        left join userinfo user on o.user_id = user.id
+        left join user_address uad on o.address_id = uad.id
+        <where>
+            <if test="username != null and username != '' ">
+                and user.username LIKE "%"#{username}"%"
+            </if>
+            <if test="phone != '' and phone != null ">
+                and user.phone = #{phone}
+            </if>
+            <if test="orderId != '' and orderId != null">
+                and o.id = #{orderId}
+            </if>
+            <if test="status != '' and status != null">
+                and o.status = #{status}
+            </if>
+            <if test="start != '' and start != null">
+                and o.order_date >= #{start}
+            </if>
+            <if test="end != '' and end != null">
+                and #{end} >= o.reach_date
+            </if>
+            and o.delete_mark = 'N'
+        </where>
+        order by o.reach_date desc
+    </select>
+
+    <resultMap id="orderDishMap" type="com.example.entity.DishOrder">
+        <result column="dishName" property="dish_name" />
+        <result column="imageUrl" property="image_url" />
+        <result column="introduce" property="introduce" />
+        <result column="recommendationLevel" property="recommendation_level" />
+        <result column="type" property="type" />
+        <result column="tag" property="tag" />
+        <result column="price" property="price" />
+        <result column="discounts" property="discounts" />
+        <result column="discountsPrice" property="discounts_price"/>
+        <result column="total" property="total"/>
+    </resultMap>
+    <select id="getDishOrderById" resultMap="orderDishMap">
+        select dish_name, image_url, introduce, recommendation_level, type, tag, price,
+               discounts, discounts_price, total
+        from dish
+        <where>
+            delete_mark = 'N' and is_show = '上架' and id = #{id}
+        </where>
+    </select>
+</mapper>

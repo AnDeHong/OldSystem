@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.mapper.DishMapper">
+    <!-- 查询用户信息 -->
+    <select id="getAll" resultType="com.example.entity.Dish">
+        SELECT * FROM dish WHERE delete_mark = 'N'
+    </select>
+
+    <select id="getDishes" parameterType="java.lang.String" resultType="com.example.entity.Dish">
+        select * from dish
+        <where>
+            <if test="name != null and name != '' ">
+                and dish_name LIKE "%"#{name}"%"
+            </if>
+            <if test="type != '' and type != null ">
+                and type = #{type}
+            </if>
+            <if test="status != '' and status != null">
+                and is_show = #{status}
+            </if>
+        and delete_mark = 'N'
+        </where>
+    </select>
+
+    <select id="getDishName" resultMap="dishVoMap">
+        select id,dish_name from dish where delete_mark = 'N' and is_show = '上架' and type = #{type}
+    </select>
+    <resultMap id="dishVoMap" type="com.example.vo.DishVo">
+        <id property="id" column="id"></id>
+        <result column="dishName" property="dish_name"></result>
+    </resultMap>
+
+    <select id="getPackDish" resultType="com.example.entity.Dish">
+        select * from dish where delete_mark = 'N' and is_show = '上架' and dish_name = #{name}
+    </select>
+
+    <select id="getPackDishByNo" resultType="com.example.entity.Dish">
+        select * from dish where delete_mark = 'N' and is_show = '上架' and dish_no = #{packageNo}
+    </select>
+</mapper>

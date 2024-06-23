@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.mapper.OrdersMapper">
+    <!-- 查询用户信息 -->
+    <resultMap id="ordersVoMap" type="com.example.vo.OrdersVo">
+        <id column="id" property="id" />
+        <result column="orderNo" property="order_no" />
+        <result column="username" property="username" />
+        <result column="address" property="address" />
+        <result column="dishIds" property="dish_ids" />
+        <result column="price" property="price" />
+        <result column="sendId" property="send_id" />
+        <result column="chooseDate" property="choose_date" />
+        <result column="orderDate" property="order_date" />
+        <result column="reachDate" property="reach_date" />
+        <result column="num" property="num"/>
+        <result column="status" property="status"/>
+        <result column="evaluate" property="evaluate" />
+        <result column="notes" property="notes" />
+    </resultMap>
+    <select id="getOrders" resultMap="ordersVoMap">
+        select o.id id,order_no,uad.address address,dish_ids,price,send_id,order_date,reach_date,
+               num,status,evaluate,notes,choose_date
+        from orders o
+        left join user_address uad on o.address_id = uad.id
+        where delete_mark = 'N' and o.user_id = #{userId}
+    </select>
+
+    <select id="getOrdersByDate" resultMap="ordersVoMap">
+        select o.id id,order_no,uad.username username,dish_ids,price,send_id,order_date,reach_date,
+               num,status,evaluate,notes,choose_date
+        from orders o
+                 left join userinfo uad on o.user_id = uad.id
+        where o.start_date >= #{time} and #{time1} >= o.end_date and o.delete_mark = 'N'
+    </select>
+    <select id="getAllOrder" resultMap="ordersVoMap">
+        select o.id id,order_no,uad.username username,dish_ids,price,send_id,order_date,reach_date,
+               num,status,evaluate,notes,choose_date
+        from orders o
+                 left join userinfo uad on o.user_id = uad.id
+        where o.delete_mark = 'N'
+    </select>
+</mapper>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.mapper.UserDishMapper">
+
+    <resultMap id="DishVoMap" type="com.example.vo.DishVo">
+        <id column="id" property="id"/>
+        <result column="dishName" property="dish_name" />
+        <result column="dishNo" property="dish_no" />
+        <result column="imageUrl" property="image_url" />
+        <result column="type" property="type" />
+        <result column="tag" property="tag" />
+        <result column="price" property="price" />
+        <result column="discountsPrice" property="discounts_price" />
+        <result column="total" property="total" />
+        <result column="recommendationLevel" property="recommendation_level"/>
+    </resultMap>
+    <!-- 查询用户信息 -->
+    <select id="getAll" resultMap="DishVoMap">
+        select id,dish_no,dish_name,image_url,type,tag,price,discounts_price,total,recommendation_level
+        from dish where delete_mark = 'N' and is_show = '上架'
+    </select>
+
+    <select id="getPackDish" resultType="com.example.entity.Dish">
+        select * from dish where delete_mark = 'N' and is_show = '上架' and dish_name = #{name}
+    </select>
+</mapper>

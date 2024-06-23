@@ -1,0 +1,51 @@
+server:
+  port: 8800
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  mail:
+    host: smtp.qq.com
+    username: 508430810@qq.com
+    password: pslhimupvqjmbhjj
+    port: 587
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  datasource:
+    url: jdbc:mysql://localhost:3306/graduationdesign?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT%2b8
+    username: root
+    password:
+
+  application:
+    name: user-services
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.127.1:8848
+  redis:
+    host: 192.168.1.100
+    port: 6379
+    password:
+
+mybatis-plus:
+  mapper-locations: classpath:mappers/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+#springfox:
+#  documentation:
+#    swagger:
+#      v2:
+#        enabled: false
+#

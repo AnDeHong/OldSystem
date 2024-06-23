@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.mapper.ActivityMapper">
+    <!-- 查询用户信息 -->
+    <select id="getAll" resultType="com.example.entity.Activity">
+        SELECT * FROM activities where delete_mark = 'N'
+    </select>
+
+    <select id="getById" parameterType="com.example.entity.Activity">
+        select * from activities where id = #{id} and delete_mark = 'N'
+    </select>
+</mapper>

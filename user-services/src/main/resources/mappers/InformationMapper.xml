@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.mapper.InformationMapper">
+    <!-- 查询信息 -->
+    <resultMap id="informationVoMap" type="com.example.vo.informationVo">
+        <id column="id" property="id" />
+        <result column="title" property="title" />
+        <result column="author" property="author" />
+        <result column="type" property="type" />
+        <result column="tag" property="tag" />
+        <result column="releaseDate" property="release_date" />
+        <result column="content" property="content" />
+        <result column="url" property="url" />
+        <result column="imgUrl" property="img_url" />
+        <result column="num" property="num"/>
+        <result column="status" property="status"/>
+        <result column="readTimes" property="read_times" />
+    </resultMap>
+    <select id="getInformation" resultMap="informationVoMap">
+        SELECT id, title, author, type, tag, release_date, content, url, img_url,
+        read_times FROM information
+        <where>
+            <if test="key != null and key != '' ">
+                and title LIKE "%"#{key}"%"
+            </if>
+            <if test="type != '' and type != null ">
+                and type = #{type}
+            </if>
+            and delete_mark = 'N' and status = "上架"
+        </where>
+        order by read_times desc
+    </select>
+
+    <select id="getById" resultType="com.example.entity.Information">
+        select * from information where id = #{id} and delete_mark = 'N' and status = "上架"
+    </select>
+</mapper>

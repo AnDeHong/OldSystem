@@ -1,0 +1,51 @@
+Index: .idea/encodings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"Encoding\">\r\n    <file url=\"file://$PROJECT_DIR$/admin-services/src/main/java\" charset=\"UTF-8\" />\r\n    <file url=\"file://$PROJECT_DIR$/commons/src/main/java\" charset=\"UTF-8\" />\r\n    <file url=\"file://$PROJECT_DIR$/gateway/src/main/java\" charset=\"UTF-8\" />\r\n    <file url=\"file://$PROJECT_DIR$/src/main/java\" charset=\"UTF-8\" />\r\n    <file url=\"file://$PROJECT_DIR$/src/main/resources\" charset=\"UTF-8\" />\r\n    <file url=\"file://$PROJECT_DIR$/untitled/src/main/java\" charset=\"UTF-8\" />\r\n    <file url=\"file://$PROJECT_DIR$/user-services/src/main/java\" charset=\"UTF-8\" />\r\n  </component>\r\n</project>
+===================================================================
+diff --git a/.idea/encodings.xml b/.idea/encodings.xml
+--- a/.idea/encodings.xml	
++++ b/.idea/encodings.xml	
+@@ -2,11 +2,15 @@
+ <project version="4">
+   <component name="Encoding">
+     <file url="file://$PROJECT_DIR$/admin-services/src/main/java" charset="UTF-8" />
++    <file url="file://$PROJECT_DIR$/admin-services/src/main/resources" charset="UTF-8" />
+     <file url="file://$PROJECT_DIR$/commons/src/main/java" charset="UTF-8" />
++    <file url="file://$PROJECT_DIR$/commons/src/main/resources" charset="UTF-8" />
+     <file url="file://$PROJECT_DIR$/gateway/src/main/java" charset="UTF-8" />
++    <file url="file://$PROJECT_DIR$/gateway/src/main/resources" charset="UTF-8" />
+     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+     <file url="file://$PROJECT_DIR$/untitled/src/main/java" charset="UTF-8" />
+     <file url="file://$PROJECT_DIR$/user-services/src/main/java" charset="UTF-8" />
++    <file url="file://$PROJECT_DIR$/user-services/src/main/resources" charset="UTF-8" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: .idea/compiler.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"CompilerConfiguration\">\r\n    <annotationProcessing>\r\n      <profile name=\"Maven default annotation processors profile\" enabled=\"true\">\r\n        <sourceOutputDir name=\"target/generated-sources/annotations\" />\r\n        <sourceTestOutputDir name=\"target/generated-test-sources/test-annotations\" />\r\n        <outputRelativeToContentRoot value=\"true\" />\r\n        <module name=\"user-services\" />\r\n        <module name=\"commons\" />\r\n        <module name=\"gateway\" />\r\n        <module name=\"admin-services\" />\r\n      </profile>\r\n    </annotationProcessing>\r\n    <bytecodeTargetLevel>\r\n      <module name=\"untitled\" target=\"17\" />\r\n    </bytecodeTargetLevel>\r\n  </component>\r\n  <component name=\"JavacSettings\">\r\n    <option name=\"ADDITIONAL_OPTIONS_OVERRIDE\">\r\n      <module name=\"admin-services\" options=\"-parameters\" />\r\n      <module name=\"commons\" options=\"-parameters\" />\r\n      <module name=\"gateway\" options=\"-parameters\" />\r\n      <module name=\"springCloud-demo1\" options=\"\" />\r\n      <module name=\"untitled\" options=\"-parameters\" />\r\n      <module name=\"user-services\" options=\"-parameters\" />\r\n    </option>\r\n  </component>\r\n</project>
+===================================================================
+diff --git a/.idea/compiler.xml b/.idea/compiler.xml
+--- a/.idea/compiler.xml	
++++ b/.idea/compiler.xml	
+@@ -18,12 +18,12 @@
+   </component>
+   <component name="JavacSettings">
+     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+-      <module name="admin-services" options="-parameters" />
+-      <module name="commons" options="-parameters" />
+-      <module name="gateway" options="-parameters" />
++      <module name="admin-services" options="" />
++      <module name="commons" options="" />
++      <module name="gateway" options="" />
+       <module name="springCloud-demo1" options="" />
+       <module name="untitled" options="-parameters" />
+-      <module name="user-services" options="-parameters" />
++      <module name="user-services" options="" />
+     </option>
+   </component>
+ </project>
+\ No newline at end of file
